@@ -2,7 +2,7 @@ const { users } = require("./data-layer");
 
 function getUser() {
   users.map((user, i) => {
-    console.log(i + 1);
+    console.log(user.id);
     console.log("-----------------------------");
     console.log("Nombre: " + user.nombre);
     console.log("Correo: " + user.email);
@@ -15,7 +15,10 @@ function getUser() {
 }
 
 function createUser(nombre, correo, edad) {
+  const lastId = users.reduce((maxId, user) => Math.max(maxId, user.id), 0);
+
   const newUser = {
+    id: lastId + 1,
     nombre: nombre,
     email: correo,
     edad: parseInt(edad, 10),
@@ -31,7 +34,58 @@ function createUser(nombre, correo, edad) {
   console.log(" ");
 }
 
+function editUser(id, option, value) {
+  const findUser = users.find((user) => user.id == id);
+
+  if (!findUser) {
+    console.log("No existe un usuario con este ID.");
+    return;
+  }
+
+  console.log(" ");
+
+  if (option == 1) {
+    findUser.nombre = value;
+  } else if (option == 2) {
+    findUser.email = value;
+  } else if (option == 3) {
+    findUser.edad = value;
+  } else {
+    return;
+  }
+
+  console.log("");
+  console.log(findUser.id);
+  console.log("-----------------------------");
+  console.log("Nombre: " + findUser.nombre);
+  console.log("Correo: " + findUser.email);
+  console.log("Edad: " + findUser.edad);
+  console.log("-----------------------------");
+  console.log(" ");
+  console.log("Usuario guardado con éxito!");
+  console.log(" ");
+}
+
+function deleteUser(id) {
+  const findUser = users.find((user) => user.id == id);
+
+  if (!findUser) {
+    console.log("No existe un usuario con este ID.");
+    return;
+  }
+
+  const newUsers = users.filter((user) => user.id != id);
+
+  users.length = 0;
+  users.push(...newUsers);
+
+  console.log(" ");
+  console.log("Usuario eliminado con éxito!");
+}
+
 module.exports = {
   getUser,
   createUser,
+  editUser,
+  deleteUser,
 };

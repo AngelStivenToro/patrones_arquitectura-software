@@ -1,5 +1,10 @@
 const readline = require("readline");
-const { getUser, createUser } = require("./business-layer");
+const {
+  getUser,
+  createUser,
+  deleteUser,
+  editUser,
+} = require("./business-layer");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -32,7 +37,7 @@ async function mostrarMenu() {
     console.log("1 - Ver usuarios");
     console.log("2 - Crear usuario");
     console.log("3 - Editar usuario");
-    console.log("4 - Eliminar usuario?");
+    console.log("4 - Eliminar usuario");
     console.log("5 - Salir del sistema");
     console.log(" ");
     console.log("---------------------");
@@ -52,9 +57,15 @@ async function mostrarMenu() {
         }
         break;
       case "2":
-        const nombre = await optionSelected("Introduce el nombre del nuevo usuario: ");
-        const correo = await optionSelected("Introduce el correo del nuevo usuario: ");
-        const edad = await optionSelected("Introduce la edad del nuevo usuario: ");
+        const nombre = await optionSelected(
+          "Introduce el nombre del nuevo usuario: "
+        );
+        const correo = await optionSelected(
+          "Introduce el correo del nuevo usuario: "
+        );
+        const edad = await optionSelected(
+          "Introduce la edad del nuevo usuario: "
+        );
 
         createUser(nombre, correo, edad);
 
@@ -62,14 +73,29 @@ async function mostrarMenu() {
         console.log(" ");
         break;
       case "3":
-        const idUsuario = await optionSelected(
+        const idUserToEdit = await optionSelected(
           "Introduce el ID del usuario a editar: "
         );
+        console.log("");
+        console.log("Opciones de edición :");
+        console.log("----------------------------------------------");
+        console.log("1 - Nombre");
+        console.log("2 - Correo");
+        console.log("3 - Edad");
+        console.log("----------------------------------------------");
+
+        const optionEdit = await optionSelected("Ingrese opción a editar: ");
+
+        const value = await optionSelected("Ingrese el nuevo valor: ");
+
+        editUser(idUserToEdit, optionEdit, value);
+
         break;
       case "4":
-        const idEliminar = await optionSelected(
-          "Introduce el ID del usuario a eliminar: "
+        const idUserToDelete = await optionSelected(
+          "Introduce el id del usuario a eliminar: "
         );
+        deleteUser(idUserToDelete);
         break;
       case "5":
         console.log("Cerrando sesión...");
