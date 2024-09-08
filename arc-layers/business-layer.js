@@ -1,5 +1,6 @@
 const { users } = require("./data-layer");
 
+// Obtener usuario
 function getUser() {
   users.map((user, i) => {
     console.log(user.id);
@@ -14,6 +15,7 @@ function getUser() {
   console.log(" ");
 }
 
+// Crear usuarios
 function createUser(nombre, correo, edad) {
   const lastId = users.reduce((maxId, user) => Math.max(maxId, user.id), 0);
 
@@ -34,6 +36,7 @@ function createUser(nombre, correo, edad) {
   console.log(" ");
 }
 
+// Editar usuarios
 function editUser(id, option, value) {
   const findUser = users.find((user) => user.id == id);
 
@@ -66,6 +69,7 @@ function editUser(id, option, value) {
   console.log(" ");
 }
 
+// Eliminar usuarios
 function deleteUser(id) {
   const findUser = users.find((user) => user.id == id);
 

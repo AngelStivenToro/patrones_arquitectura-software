@@ -6,11 +6,13 @@ const {
   editUser,
 } = require("./business-layer");
 
+// import para leer lineas
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
+// manejo de selección de opciones
 function optionSelected(question) {
   return new Promise((resolve) => {
     rl.question(question, (answer) => {
@@ -19,10 +21,11 @@ function optionSelected(question) {
   });
 }
 
+// delay de cierre de sesión
 function timeSignOut(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
+// Menú de la app
 async function mostrarMenu() {
   let salir = false;
 
@@ -99,7 +102,7 @@ async function mostrarMenu() {
         break;
       case "5":
         console.log("Cerrando sesión...");
-        await timeSignOut(2000);
+        await timeSignOut(1500);
         console.log("Sesión Cerrada.");
         salir = true;
         break;
@@ -109,7 +112,6 @@ async function mostrarMenu() {
         );
     }
   }
-
   rl.close();
 }
 
