@@ -1,4 +1,3 @@
-// controllers/taskController.js
 const readline = require("readline");
 const taskModel = require("../models/taskModel");
 const taskView = require("../views/taskView");

@@ -1,4 +1,3 @@
-
 function showTasks(tasks) {
     console.log('Lista de Tareas:');
     tasks.forEach(task => {
